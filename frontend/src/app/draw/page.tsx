@@ -79,6 +79,10 @@ function DrawerPage() {
         Start Drawing
       </button>
       <Button
+        onClick={() => setColor("#ffffff")}
+        style={{ backgroundColor: "#ffffff" }}
+      />
+      <Button
         onClick={() => setColor("black")}
         style={{ backgroundColor: "black" }}
       />
@@ -91,8 +95,12 @@ function DrawerPage() {
         style={{ backgroundColor: "blue" }}
       />
       <Button
-        onClick={() => setColor("green")}
-        style={{ backgroundColor: "green" }}
+        onClick={() => setColor("#108A0F")}
+        style={{ backgroundColor: "#108A0F" }}
+      />
+      <Button
+        onClick={() => setColor("#5AEA2E")}
+        style={{ backgroundColor: "#5AEA2E" }}
       />
       <canvas
         ref={canvasRef}
