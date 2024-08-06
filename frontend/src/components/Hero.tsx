@@ -92,41 +92,15 @@ export default function Hero() {
   const yOffset = 30;
 
   return (
-    <section className="flex w-full flex-col gap-4 min-h-[100dvh] justify-center items-center md:py-10 py-32">
-      <motion.header
-        initial={{
-          y: 10,
-          opacity: 0,
-        }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          transition: {
-            duration: 0.5,
-          },
-        }}
-        className="flex max-w-md flex-col items-center gap-2 text-center"
-      >
+    <section className="flex w-full flex-col gap-4 min-h-[100dvh] overflow-hidden justify-center items-center md:py-10 py-32">
+      <div className="flex max-w-md flex-col items-center gap-2 text-center">
         <h1 className="text-4xl font-black text-primary">Pixtery</h1>
-        <Balancer className="block text-lg">
+        <p className="block text-lg">
           Draw and guess pixel art with friends and family!
-        </Balancer>
-      </motion.header>
+        </p>
+      </div>
 
-      <motion.div
-        initial={{
-          y: 10,
-          opacity: 0,
-        }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          transition: {
-            duration: 0.5,
-          },
-        }}
-        className="max-w-sm w-full px-5"
-      >
+      <div className="max-w-sm w-full px-5">
         <div className="flex gap-3 w-full justify-center items-center">
           <Link href="/draw" className="w-full">
             <Button className="w-full">Draw</Button>
@@ -135,15 +109,7 @@ export default function Hero() {
             <Button className="w-full">Guess</Button>
           </Link>
         </div>
-      </motion.div>
-
-      {/* <motion.div
-        initial={{ y: -100 }}
-        whileInView={{ y: 0, transition: { duration: 0.5 } }}
-        className="flex sm:hidden mt-10 px-5"
-      >
-        <img src="/assets/image.png" alt="" />
-      </motion.div> */}
+      </div>
 
       <div className="relative flex w-full justify-center px-4 py-10 flex-row gap-0">
         <FeatureCard
