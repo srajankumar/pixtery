@@ -105,7 +105,7 @@ export default function Hero() {
           Pixtery
         </h1>
         <div className="block md:px-0 px-10 text-lg">
-          Draw and guess pixel art with friends and family!
+          Draw and guess pixel art with friends and family.
         </div>
       </motion.header>
 
