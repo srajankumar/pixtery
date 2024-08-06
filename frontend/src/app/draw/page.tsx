@@ -11,6 +11,8 @@ const pixel = Pixelify_Sans({ subsets: ["latin"] });
 const GRID_SIZE = 15;
 const CELL_SIZE = 20;
 
+const SERVER = process.env.NEXT_PUBLIC_SERVER_URL;
+
 function DrawerPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -18,7 +20,7 @@ function DrawerPage() {
   const [word, setWord] = useState<string>("");
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket(`wss://${SERVER}`);
     setSocket(ws);
 
     ws.onopen = () => {
