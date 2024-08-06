@@ -3,33 +3,41 @@ import React, { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 const MusicPlayer: React.FC = () => {
-  const [isMuted, setIsMuted] = useState<boolean>(() => {
-    const savedState = localStorage.getItem("isMuted");
-    return savedState === "true";
-  });
+  const [isMuted, setIsMuted] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const playAudio = async () => {
+      if (audioRef.current) {
+        audioRef.current.muted = isMuted;
+        try {
+          await audioRef.current.play();
+        } catch (error) {
+          console.error("Failed to play audio:", error);
+        }
+      }
+    };
+
+    playAudio();
+  }, [isMuted]);
 
   const toggleMute = () => {
     const newMuteState = !isMuted;
     setIsMuted(newMuteState);
-    localStorage.setItem("isMuted", newMuteState.toString());
     if (audioRef.current) {
       audioRef.current.muted = newMuteState;
+      // Optionally play audio if unmuted
+      if (!newMuteState) {
+        audioRef.current
+          .play()
+          .catch((error) => console.error("Failed to play audio:", error));
+      }
     }
   };
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.muted = isMuted;
-      audioRef.current
-        .play()
-        .catch((error) => console.error("Failed to play audio:", error));
-    }
-  }, [isMuted]);
-
   return (
     <div className="fixed top-5 right-5">
-      <audio ref={audioRef} loop autoPlay>
+      <audio ref={audioRef} loop>
         <source src="/a-lonely-cherry-tree.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
