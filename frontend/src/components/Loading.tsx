@@ -5,11 +5,11 @@ import { toast } from "sonner";
 export default function Loading() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [connectionStatus, setConnectionStatus] = useState<string>("");
-  const server = process.env.NEXT_PUBLIC_SERVER_URL;
+  const SERVER = process.env.NEXT_PUBLIC_SERVER_URL;
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://${server}`);
+      const response = await fetch(`https://${SERVER}`);
       if (response.ok) {
         return { name: "Sonner" };
       } else {
@@ -21,7 +21,7 @@ export default function Loading() {
   };
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket(`wss://${SERVER}`);
 
     ws.onopen = () => {
       setIsLoading(false);
@@ -55,9 +55,9 @@ export default function Loading() {
     });
 
     toast.promise(promise, {
-      loading: "Connecting to server...",
-      success: () => "Server connection successful.",
-      error: "Server connection failed. Please try again later.",
+      loading: "Connecting to server",
+      success: () => "Server connection successful",
+      error: "Server connection failed. Please try again later",
     });
 
     return () => {
@@ -65,5 +65,5 @@ export default function Loading() {
     };
   }, []);
 
-  return <div>{isLoading ? <p>Loading...</p> : <p>{connectionStatus}</p>}</div>;
+  return <></>;
 }
