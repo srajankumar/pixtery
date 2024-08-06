@@ -47,7 +47,6 @@ function FeatureCard({
         {/* <small className="inline w-fit rounded-xl bg-orange-950 bg-opacity-50 px-2 py-1 text-xs font-medium leading-none text-white">
           {category}
         </small> */}
-
         <div className="flex-1" />
         <h3 className="rounded-xl bg-primary/50 p-3 text-base font-bold leading-none text-secondary backdrop-blur-sm">
           {title}
@@ -75,13 +74,6 @@ function FeatureCard({
       >
         {content}
       </motion.div>
-      {/* <motion.div
-        initial={{ y: 10 }}
-        whileInView={{ y: 0, transition: { duration: 0.5 } }}
-        className={cn(containerClassName, "flex sm:hidden")}
-      >
-        {content}
-      </motion.div> */}
     </>
   );
 }
@@ -93,14 +85,40 @@ export default function Hero() {
 
   return (
     <section className="flex w-full flex-col gap-4 min-h-[100dvh] overflow-hidden justify-center items-center md:py-10 py-32">
-      <div className="flex max-w-md flex-col items-center gap-2 text-center">
+      <motion.header
+        initial={{
+          y: 10,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+        className="flex max-w-md flex-col items-center gap-2 text-center"
+      >
         <h1 className="text-4xl font-black text-primary">Pixtery</h1>
-        <p className="block text-lg">
+        <Balancer className="block text-lg">
           Draw and guess pixel art with friends and family!
-        </p>
-      </div>
+        </Balancer>
+      </motion.header>
 
-      <div className="max-w-sm w-full px-5">
+      <motion.div
+        initial={{
+          y: 10,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+        className="max-w-sm w-full px-5"
+      >
         <div className="flex gap-3 w-full justify-center items-center">
           <Link href="/draw" className="w-full">
             <Button className="w-full">Draw</Button>
@@ -109,14 +127,14 @@ export default function Hero() {
             <Button className="w-full">Guess</Button>
           </Link>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="relative flex w-full justify-center px-4 py-10 flex-row gap-0">
+      <div className="relative flex w-full justify-center py-10 flex-row gap-0">
         <FeatureCard
           feature={{
-            category: "Medium",
-            imageUrl: "/assets/hero1.png",
+            category: "Heart",
             title: "Heart",
+            imageUrl: "/assets/hero1.png",
           }}
           initial={{
             x: cardWidth,
@@ -137,12 +155,11 @@ export default function Hero() {
             },
           }}
         />
-
         <FeatureCard
           feature={{
-            category: "Jugs",
+            category: "Turtle",
             title: "Turtle",
-            imageUrl: "/assets/hero3.png",
+            imageUrl: "/assets/hero2.png",
           }}
           initial={{
             y: yOffset,
@@ -158,12 +175,11 @@ export default function Hero() {
           }}
           zIndexOffset={1}
         />
-
         <FeatureCard
           feature={{
-            category: "Bottles",
+            category: "Bread",
             title: "Bread",
-            imageUrl: "/assets/hero4.png",
+            imageUrl: "/assets/hero3.png",
           }}
           initial={{
             x: -cardWidth,
