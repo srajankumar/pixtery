@@ -49,7 +49,7 @@ function FeatureCard({
         </small> */}
 
         <div className="flex-1" />
-        <h3 className="rounded-xl bg-blue-500/80 p-3 text-base font-semibold leading-none text-white backdrop-blur-sm">
+        <h3 className="rounded-xl bg-primary/50 p-3 text-base font-bold leading-none text-secondary backdrop-blur-sm">
           {title}
         </h3>
       </div>
@@ -76,7 +76,7 @@ function FeatureCard({
         {content}
       </motion.div>
       {/* <motion.div
-        initial={{ y: 100 }}
+        initial={{ y: 10 }}
         whileInView={{ y: 0, transition: { duration: 0.5 } }}
         className={cn(containerClassName, "flex sm:hidden")}
       >
@@ -92,10 +92,10 @@ export default function Hero() {
   const yOffset = 30;
 
   return (
-    <section className="flex w-full flex-col gap-4 bg-blue-50 min-h-screen justify-center items-center md:py-10 py-32">
+    <section className="flex w-full flex-col gap-4 min-h-screen justify-center items-center md:py-10 py-32">
       <motion.header
         initial={{
-          y: 100,
+          y: 10,
           opacity: 0,
         }}
         animate={{
@@ -115,7 +115,7 @@ export default function Hero() {
 
       <motion.div
         initial={{
-          y: 100,
+          y: 10,
           opacity: 0,
         }}
         animate={{
@@ -145,7 +145,7 @@ export default function Hero() {
         <img src="/assets/image.png" alt="" />
       </motion.div> */}
 
-      <div className="relative flex w-full justify-center px-4 py-12 flex-row gap-0">
+      <div className="relative flex w-full justify-center px-4 py-10 flex-row gap-0">
         <FeatureCard
           feature={{
             category: "Medium",
