@@ -3,8 +3,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Pixelify_Sans } from "next/font/google";
 import Back from "@/components/Back";
+
+import { Pixelify_Sans } from "next/font/google";
 const pixel = Pixelify_Sans({ subsets: ["latin"] });
 
 const GRID_SIZE = 15;

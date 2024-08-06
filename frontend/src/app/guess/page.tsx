@@ -1,16 +1,23 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Back from "@/components/Back";
+import { toast } from "sonner";
 
-const GRID_SIZE = 20;
-const CELL_SIZE = 30;
+import { Pixelify_Sans } from "next/font/google";
+const pixel = Pixelify_Sans({ subsets: ["latin"] });
+
+const GRID_SIZE = 15;
+const CELL_SIZE = 20;
 
 function GuesserPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [guess, setGuess] = useState<string>("");
   const [word, setWord] = useState<string>("");
-  const [timer, setTimer] = useState<number>(60);
+  const [timer, setTimer] = useState<number>(0); // Start from 0
   const [gameStatus, setGameStatus] = useState<string>("");
 
   useEffect(() => {
@@ -24,7 +31,7 @@ function GuesserPage() {
 
           if (data.type === "word") {
             setWord(data.word);
-            setTimer(60);
+            setTimer(0); // Reset timer when a new word is received
             setGameStatus("");
           }
 
@@ -53,7 +60,10 @@ function GuesserPage() {
           }
 
           if (data.type === "correct") {
+            toast.success("Correct guess");
             setGameStatus(`You guessed correctly in ${data.time} seconds!`);
+          } else if (data.type === "wrong") {
+            toast.error("Wrong guess");
           }
         } catch (error) {
           console.error("Error parsing JSON data:", error);
@@ -75,13 +85,7 @@ function GuesserPage() {
   useEffect(() => {
     if (word) {
       const interval = setInterval(() => {
-        setTimer((prev) => {
-          if (prev <= 0) {
-            clearInterval(interval);
-            return 0;
-          }
-          return prev - 1;
-        });
+        setTimer((prev) => prev + 1); // Increment timer
       }, 1000);
 
       return () => clearInterval(interval);
@@ -99,22 +103,31 @@ function GuesserPage() {
   };
 
   return (
-    <div>
-      <h1>Guesser Page</h1>
-      <canvas
-        ref={canvasRef}
-        width={GRID_SIZE * CELL_SIZE}
-        height={GRID_SIZE * CELL_SIZE}
-        style={{ border: "1px solid black" }}
-      />
-      <input
-        type="text"
-        placeholder="Enter your guess"
-        value={guess}
-        onChange={handleGuessChange}
-      />
-      <button onClick={handleGuessSubmit}>Submit Guess</button>
-      {timer > 0 && <p>Time left: {timer}s</p>}
+    <div className="max-w-md px-5 gap-5 mx-auto min-h-[100dvh] flex flex-col justify-center items-center">
+      <Back />
+      <h1 className={`${pixel.className} text-4xl font-black text-primary`}>
+        Guess
+      </h1>
+      <div className="bg-white w-fit border-2 border-secondary rounded-xl">
+        <canvas
+          ref={canvasRef}
+          width={GRID_SIZE * CELL_SIZE}
+          height={GRID_SIZE * CELL_SIZE}
+        />
+      </div>{" "}
+      <p>Time elapsed: {timer}s</p>
+      <div className="w-full flex flex-col gap-3">
+        <Input
+          type="text"
+          className="bg-white"
+          placeholder="Enter your guess"
+          value={guess}
+          onChange={handleGuessChange}
+        />
+        <Button className="w-full" onClick={handleGuessSubmit}>
+          Submit Guess
+        </Button>
+      </div>
       {gameStatus && <p>{gameStatus}</p>}
     </div>
   );

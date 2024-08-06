@@ -68,6 +68,8 @@ wss.on("connection", (ws) => {
               JSON.stringify({ type: "correct", time: timeTaken })
             );
           }
+        } else {
+          guesserSocket.send(JSON.stringify({ type: "wrong" }));
         }
       }
     } catch (error) {
