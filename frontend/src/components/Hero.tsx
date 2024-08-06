@@ -57,7 +57,7 @@ function FeatureCard({
   );
 
   const containerClassName = cn(
-    "relative flex h-60 lg:h-64 w-48 flex-col overflow-hidden rounded-2xl shadow-xl transition-shadow duration-300 ease-in-out hover:shadow-xl",
+    "relative flex h-52 w-40 md:h-64 md:w-48 flex-col overflow-hidden rounded-2xl shadow-xl transition-shadow duration-300 ease-in-out hover:shadow-xl",
     className
   );
 
@@ -70,7 +70,7 @@ function FeatureCard({
           zIndex,
           scale,
         }}
-        className={cn(containerClassName, "hidden sm:flex")}
+        className={cn(containerClassName, "flex")}
         {...props}
       >
         {content}
@@ -137,15 +137,15 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         initial={{ y: -100 }}
         whileInView={{ y: 0, transition: { duration: 0.5 } }}
         className="flex sm:hidden mt-10 px-5"
       >
         <img src="/assets/image.png" alt="" />
-      </motion.div>
+      </motion.div> */}
 
-      <div className="relative hidden sm:flex w-full flex-wrap justify-center gap-8 px-4 py-12 sm:flex-row sm:gap-0">
+      <div className="relative flex w-full justify-center px-4 py-12 flex-row gap-0">
         <FeatureCard
           feature={{
             category: "Medium",
@@ -196,7 +196,7 @@ export default function Hero() {
         <FeatureCard
           feature={{
             category: "Bottles",
-            title: "Dead Amongus",
+            title: "Amongus",
             imageUrl: "/assets/hero2.png",
           }}
           initial={{
