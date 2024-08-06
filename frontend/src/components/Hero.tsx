@@ -92,7 +92,7 @@ export default function Hero() {
   const yOffset = 30;
 
   return (
-    <section className="flex w-full flex-col gap-4 min-h-screen justify-center items-center md:py-10 py-32">
+    <section className="flex w-full flex-col gap-4 min-h-[100dvh] justify-center items-center md:py-10 py-32">
       <motion.header
         initial={{
           y: 10,
@@ -196,8 +196,8 @@ export default function Hero() {
         <FeatureCard
           feature={{
             category: "Bottles",
-            title: "Amongus",
-            imageUrl: "/assets/hero2.png",
+            title: "Bread",
+            imageUrl: "/assets/hero4.png",
           }}
           initial={{
             x: -cardWidth,

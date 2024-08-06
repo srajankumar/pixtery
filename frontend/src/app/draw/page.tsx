@@ -102,12 +102,20 @@ function DrawerPage() {
         onClick={() => setColor("#5AEA2E")}
         style={{ backgroundColor: "#5AEA2E" }}
       />
+      <Button
+        onClick={() => setColor("#6D3708")}
+        style={{ backgroundColor: "#6D3708" }}
+      />
+      <Button
+        onClick={() => setColor("#DBBD7E")}
+        style={{ backgroundColor: "#DBBD7E" }}
+      />
       <canvas
         ref={canvasRef}
         width={GRID_SIZE * CELL_SIZE}
         height={GRID_SIZE * CELL_SIZE}
         onClick={handleCellClick}
-        style={{ border: "1px solid black" }}
+        style={{ border: "1px solid black", background: "white" }}
       />
       <Button onClick={clearCanvas}>Clear Canvas</Button>
     </div>
