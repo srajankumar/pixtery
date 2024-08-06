@@ -1,12 +1,12 @@
 "use client";
 
 import Hero from "@/components/Hero";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Loading from "@/components/Loading";
 
 function Page() {
   return (
     <div>
+      <Loading />
       <Hero />
     </div>
   );
