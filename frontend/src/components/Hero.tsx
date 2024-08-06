@@ -5,7 +5,9 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import Balancer from "react-wrap-balancer";
+
+import { Pixelify_Sans } from "next/font/google";
+const pixel = Pixelify_Sans({ subsets: ["latin"] });
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -99,10 +101,12 @@ export default function Hero() {
         }}
         className="flex max-w-md flex-col items-center gap-2 text-center"
       >
-        <h1 className="text-4xl font-black text-primary">Pixtery</h1>
-        <Balancer className="block text-lg">
+        <h1 className={`${pixel.className} text-5xl font-black text-primary`}>
+          Pixtery
+        </h1>
+        <div className="block md:px-0 px-10 text-lg">
           Draw and guess pixel art with friends and family!
-        </Balancer>
+        </div>
       </motion.header>
 
       <motion.div
