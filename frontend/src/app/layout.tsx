@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`text-secondary ${inter.className}`}>
-        <MusicPlayer />
+        {/* <MusicPlayer /> */}
         <main>{children}</main>
         <Toaster position="top-right" />
       </body>
