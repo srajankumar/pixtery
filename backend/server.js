@@ -122,50 +122,145 @@
 //   console.log(`Server running on port ${PORT}`);
 // });
 
+// const express = require("express");
+// const http = require("http");
+// const { Server } = require("socket.io");
+
+// const app = express();
+// const server = http.createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000", // Replace with your frontend URL
+//     methods: ["GET", "POST"],
+//   },
+// });
+
+// const gridSize = 10; // 10x10 grid
+// let grid = Array(gridSize)
+//   .fill()
+//   .map(() => Array(gridSize).fill("neutral"));
+// let players = {};
+
+// io.on("connection", (socket) => {
+//   console.log("A user connected: ", socket.id);
+
+//   // Assign player a unique color
+//   const playerColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+//   players[socket.id] = { color: playerColor, score: 0 };
+
+//   // Log to check if init is being sent
+//   console.log("Sending initial grid and player color");
+//   socket.emit("init", { grid, color: playerColor });
+
+//   socket.on("move", ({ x, y }) => {
+//     if (grid[x][y] !== players[socket.id].color) {
+//       grid[x][y] = players[socket.id].color;
+//       players[socket.id].score++;
+//       io.emit("updateGrid", { grid, players });
+//     }
+//   });
+
+//   socket.on("disconnect", () => {
+//     delete players[socket.id];
+//     console.log("User disconnected: ", socket.id);
+//   });
+// });
+
+// server.listen(3001, () => {
+//   console.log("Server is running on port 3001");
+// });
+
 const express = require("express");
 const http = require("http");
-const { Server } = require("socket.io");
+const socketIo = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000", // Replace with your frontend URL
-    methods: ["GET", "POST"],
-  },
-});
+const io = socketIo(server);
 
-const gridSize = 10; // 10x10 grid
-let grid = Array(gridSize)
-  .fill()
-  .map(() => Array(gridSize).fill("neutral"));
-let players = {};
+const PORT = process.env.PORT || 3001;
+
+// Store room data and player information
+const rooms = {};
 
 io.on("connection", (socket) => {
   console.log("A user connected: ", socket.id);
 
-  // Assign player a unique color
-  const playerColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-  players[socket.id] = { color: playerColor, score: 0 };
+  // Join a room
+  socket.on("joinRoom", ({ roomId, playerName }) => {
+    socket.join(roomId);
 
-  // Log to check if init is being sent
-  console.log("Sending initial grid and player color");
-  socket.emit("init", { grid, color: playerColor });
+    if (!rooms[roomId]) {
+      rooms[roomId] = {
+        grid: Array(10)
+          .fill(null)
+          .map(() => Array(10).fill("#ffffff")), // 10x10 grid
+        players: {},
+      };
+    }
 
-  socket.on("move", ({ x, y }) => {
-    if (grid[x][y] !== players[socket.id].color) {
-      grid[x][y] = players[socket.id].color;
-      players[socket.id].score++;
-      io.emit("updateGrid", { grid, players });
+    // Add player to the room
+    rooms[roomId].players[socket.id] = {
+      name: playerName,
+      color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+      score: 0,
+    };
+
+    // Emit the initial state to the player
+    socket.emit("init", {
+      grid: rooms[roomId].grid,
+      color: rooms[roomId].players[socket.id].color,
+      players: rooms[roomId].players,
+    });
+
+    // Broadcast the updated player list
+    io.to(roomId).emit("updatePlayers", rooms[roomId].players);
+  });
+
+  // Handle tile coloring
+  socket.on("move", ({ roomId, x, y }) => {
+    const room = rooms[roomId];
+    const player = room.players[socket.id];
+    if (room && room.grid[x][y] === "#ffffff") {
+      // Only color if the tile is white
+      room.grid[x][y] = player.color;
+      player.score++;
+      io.to(roomId).emit("updateGrid", {
+        grid: room.grid,
+        players: room.players,
+      });
     }
   });
 
+  // Clear data
+  socket.on("clearData", (roomId) => {
+    if (rooms[roomId]) {
+      rooms[roomId].grid = Array(10)
+        .fill(null)
+        .map(() => Array(10).fill("#ffffff")); // Reset grid
+      for (const playerId in rooms[roomId].players) {
+        rooms[roomId].players[playerId].score = 0; // Reset scores
+      }
+      io.to(roomId).emit("updateGrid", {
+        grid: rooms[roomId].grid,
+        players: rooms[roomId].players,
+      });
+      io.to(roomId).emit("updatePlayers", rooms[roomId].players); // Notify players of updated scores
+    }
+  });
+
+  // Handle player disconnection
   socket.on("disconnect", () => {
-    delete players[socket.id];
+    for (const roomId in rooms) {
+      if (rooms[roomId].players[socket.id]) {
+        delete rooms[roomId].players[socket.id];
+        io.to(roomId).emit("updatePlayers", rooms[roomId].players);
+      }
+    }
     console.log("User disconnected: ", socket.id);
   });
 });
 
-server.listen(3001, () => {
-  console.log("Server is running on port 3001");
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
