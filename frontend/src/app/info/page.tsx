@@ -13,71 +13,51 @@ const page = () => {
       </h1>
       <ScrollArea className="h-[500px] w-full rounded-md border-2 border-secondary p-5">
         <div className="mb-5">
-          <h2 className="text-xl font-bold mb-2">About Pixtery</h2>
+          <h2 className="text-xl font-bold mb-2">About</h2>
           <p>
-            This game is best played{" "}
-            <span className="font-bold text-primary">in-person</span> with
-            friends or family. One (or more) players will choose a word and{" "}
-            <span className="font-bold text-primary">draw</span> it, while the
-            others try to <span className="font-bold text-primary">guess</span>{" "}
-            the word based on the drawing. The player who guesses the word the
-            fastest wins!{" "}
+            <span className="font-bold text-primary">Pixtery</span> is a
+            multiplayer, real-time strategy game where players compete to
+            conquer a shared grid by coloring as many tiles as possible. In this
+            fast-paced game, each player's objective is to capture and maintain
+            the most territory on the grid by the end of the game.
           </p>
         </div>
         <div className="mb-5">
-          <h2 className="text-xl font-bold mb-2">Draw</h2>
+          <h2 className="text-xl font-bold mb-2">How to Play</h2>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              Enter the word to draw, and click{" "}
-              <span className="font-bold text-primary">Start Drawing</span>{" "}
-              button.
+              The game board consists of{" "}
+              <span className="font-bold text-primary">grid</span> of tiles.
             </li>
             <li>
-              Choose any color from the palette, and start drawing. (use white
-              color as an eraser)
+              Each tile starts as{" "}
+              <span className="font-bold text-primary">white</span> and can be
+              colored by any player.
             </li>
             <li>
-              Meanwhile, other players will try to guess the word you have
-              entered based on your drawing.
+              Players are assigned{" "}
+              <span className="font-bold text-primary">unique colors</span> when
+              they join the game.
             </li>
             <li>
-              Use <span className="font-bold text-primary">Clear Canvas</span>{" "}
-              button to clear the canvas.
+              Color as{" "}
+              <span className="font-bold text-primary">
+                many tiles as possible
+              </span>{" "}
+              to expand your territory.
             </li>
             <li>
-              If you wish to start a new game, clear the canvas, type in a new
-              word, and press{" "}
-              <span className="font-bold text-primary">Start Drawing</span>{" "}
-              again.
+              The player who controls the{" "}
+              <span className="font-bold text-primary">most tiles</span> on the
+              grid <span className="font-bold text-primary">wins</span>.
+            </li>
+            <li>
+              Players' <span className="font-bold text-primary">scores</span>{" "}
+              are updated in real-time as tiles are captured.
             </li>
           </ul>
         </div>
-        <div className="mb-5">
-          <h2 className="text-xl font-bold mb-2">Guess</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              Whenever the person starts the drawing (i.e., clicks the{" "}
-              <span className="font-bold text-primary">Start Drawing</span>{" "}
-              button),{" "}
-              <span className="font-bold text-primary">Time elapsed</span> will
-              reset / start.
-            </li>
-            <li>
-              Based on the drawing seen on the canvas, you will have to guess
-              the word.
-            </li>
-            <li>Type in your guess in the input field given.</li>
-            <li>
-              If your guess is correct, then you can see how fast (
-              <span className="font-bold text-primary">Time in seconds</span>)
-              you have guessed the word correctly.
-            </li>
-            <li>
-              The player who guesses the word the{" "}
-              <span className="font-bold text-primary">fastest</span> wins!
-            </li>
-          </ul>
-        </div>
+
         <div className="font-bold">
           created by{" "}
           <Link
