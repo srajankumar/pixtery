@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import { Toaster } from "@/components/ui/sonner";
 import BgMusic from "@/components/BgMusic";
 import Loading from "@/components/Loading";
 
@@ -24,7 +23,6 @@ export default function RootLayout({
         <Loading />
         <BgMusic />
         <main>{children}</main>
-        <Toaster position="top-right" />
       </body>
     </html>
   );
