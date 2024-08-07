@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import BgMusic from "@/components/BgMusic";
 import Loading from "@/components/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`text-secondary ${inter.className}`}>
         <Loading />
-        <BgMusic />
         <main>{children}</main>
       </body>
     </html>

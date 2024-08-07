@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 const BgMusic = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef(null);
 
   const togglePlayPause = () => {
