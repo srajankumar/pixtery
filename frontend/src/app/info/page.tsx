@@ -18,8 +18,8 @@ const page = () => {
             <span className="font-bold text-primary">Pixtery</span> is a
             multiplayer, real-time strategy game where players compete to
             conquer a shared grid by coloring as many tiles as possible. In this
-            fast-paced game, each player's objective is to capture and maintain
-            the most territory on the grid by the end of the game.
+            fast-paced game, each player&apos;s objective is to capture and
+            maintain the most territory on the grid by the end of the game.
           </p>
         </div>
         <div className="mb-5">
@@ -52,8 +52,9 @@ const page = () => {
               grid <span className="font-bold text-primary">wins</span>.
             </li>
             <li>
-              Players' <span className="font-bold text-primary">scores</span>{" "}
-              are updated in real-time as tiles are captured.
+              Players&apos;{" "}
+              <span className="font-bold text-primary">scores</span> are updated
+              in real-time as tiles are captured.
             </li>
           </ul>
         </div>
