@@ -11,7 +11,7 @@ const Back = () => {
         href="/"
         className={`${pixel.className} text-xl font-black text-primary hover:text-secondary transition-colors duration-300`}
       >
-        Home
+        Back
       </Link>
     </div>
   );

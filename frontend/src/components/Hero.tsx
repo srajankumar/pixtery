@@ -11,7 +11,7 @@ const pixel = Pixelify_Sans({ subsets: ["latin"] });
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 interface FeatureCardProps extends HTMLMotionProps<"div"> {
   feature: {
