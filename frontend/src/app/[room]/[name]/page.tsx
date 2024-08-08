@@ -4,11 +4,19 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, QrCode, ScanLine } from "lucide-react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Pixelify_Sans } from "next/font/google";
 import Back from "@/components/Back";
 import BgMusic from "@/components/BgMusic";
+import Qr from "@/components/Qr";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const pixel = Pixelify_Sans({ subsets: ["latin"] });
 const SOCKET_SERVER_URL =
@@ -129,9 +137,29 @@ export default function RoomPage({
               <Skeleton className="w-[17.5rem] h-[17.5rem] rounded-none" />
             )}
           </div>
-          <Button className="w-full" onClick={handleClearData}>
-            Clear Data
-          </Button>
+          <div className="flex gap-3">
+            <Button className="w-full" onClick={handleClearData}>
+              Clear Data
+            </Button>
+            <Dialog>
+              <DialogTrigger>
+                <div
+                  className="w-full inline-flex hover:scale-[102%] transition-all duration-300 items-center justify-center whitespace-nowrap rounded-md text-sm
+                  font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-3 py-2"
+                >
+                  <ScanLine className="w-5 h-5" />
+                </div>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="w-full text-center">
+                    Invite others
+                  </DialogTitle>
+                </DialogHeader>
+                <Qr id={room_id} />
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
         <div className="flex flex-col gap-5">
           <div className="md:flex flex-col hidden gap-1">
