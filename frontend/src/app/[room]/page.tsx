@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Pixelify_Sans } from "next/font/google";
 const pixel = Pixelify_Sans({ subsets: ["latin"] });
 
-const page = ({ params }: { params: { room: string } }) => {
+const Page = ({ params }: { params: { room: string } }) => {
   const room_id = params.room;
 
   const [name, setName] = useState("");
@@ -49,4 +49,4 @@ const page = ({ params }: { params: { room: string } }) => {
   );
 };
 
-export default page;
+export default Page;
