@@ -6,14 +6,9 @@ const pixel = Pixelify_Sans({ subsets: ["latin"] });
 
 const Back = () => {
   return (
-    <div className="absolute top-5 left-5">
-      <Link
-        href="/"
-        className={`${pixel.className} text-xl font-black text-primary hover:text-secondary transition-colors duration-300`}
-      >
-        Back
-      </Link>
-    </div>
+    <Link href="/" className="absolute top-5 left-5">
+      <Button className="bg-secondary hover:bg-secondary/90">Back</Button>
+    </Link>
   );
 };
 
