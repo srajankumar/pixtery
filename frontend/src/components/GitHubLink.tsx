@@ -4,17 +4,18 @@ import { Pixelify_Sans } from "next/font/google";
 import Link from "next/link";
 const pixel = Pixelify_Sans({ subsets: ["latin"] });
 
-const Back = () => {
+const GitHubLink = () => {
   return (
-    <div className="absolute top-5 left-5">
+    <div className="absolute top-5 right-5">
       <Link
-        href="/"
+        href="https://github.com/srajankumar/pixtery"
+        target="_blank"
         className={`${pixel.className} text-xl font-black text-primary hover:text-secondary transition-colors duration-300`}
       >
-        back
+        source-code
       </Link>
     </div>
   );
 };
 
-export default Back;
+export default GitHubLink;

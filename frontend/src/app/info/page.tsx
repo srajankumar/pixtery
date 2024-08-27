@@ -1,4 +1,5 @@
 import Back from "@/components/Back";
+import GitHubLink from "@/components/GitHubLink";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Pixelify_Sans } from "next/font/google";
 import Link from "next/link";
@@ -8,6 +9,7 @@ const page = () => {
   return (
     <div className="max-w-md px-5 gap-5 mx-auto min-h-[100dvh] flex flex-col justify-center items-center">
       <Back />
+      <GitHubLink />
       <h1 className={`${pixel.className} text-4xl font-black text-primary`}>
         Info
       </h1>
