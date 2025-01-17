@@ -10,7 +10,12 @@ const io = socketIo(server);
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://pixtery.vercel.app"], // Replace with your frontend URLs
+  origin: [
+    "http://localhost:3000",
+    "https://pixtery.vercel.app",
+    "https://srajan.vercel.app",
+    "https://srajan.tech",
+  ],
   methods: ["GET", "POST"],
   credentials: true,
 };
